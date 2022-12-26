@@ -4,6 +4,7 @@ const withAngoraFetch = require('@angora/fetch/webpack/with-angora-fetch');
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@angora/fetch'],
+  experimental: { appDir: true },
 };
 
 module.exports = withAngoraFetch(nextConfig);

@@ -51,21 +51,15 @@ class AngoraFetchPlugin {
       pageFilePath = normalizePathSep(pageFilePath);
 
       // STEP 2: Get source code.
-      // CASE 2.1: Handle Node.js Runtime for `pages` folder.
-      const chunk = entrypoint.chunks.find((chunk) => chunk.id === entrypoint.name);
-      const modules = [...compilation.chunkGraph.getChunkEntryModulesIterable(chunk)];
-      const entryModule = modules?.[0];
-      const sourceMapSource = entryModule?.originalSource?.();
-      const source = sourceMapSource?.source?.() ?? '';
+      let source = '';
 
-      // CASE 2.2: Handle Edge Runtime for `pages` folder.
-      // TODO
+      for (const currentModule of entrypoint._modulePostOrderIndices.keys()) {
+        const currentSource = currentModule.originalSource()?.source?.();
 
-      // CASE 2.3: Handle Node.js Runtime for `app` folder.
-      // TODO
-
-      // CASE 2.4: Handle Edge Runtime for `app` folder.
-      // TODO
+        if (currentSource) {
+          source = `${source}\n${currentSource}`;
+        }
+      }
 
       // STEP 3: Get `angora` config object.
       if (!/export const angora/.test(source)) {

@@ -7,4 +7,5 @@ module.exports.IGNORED_FILES = [
   '_app',
   '_error',
   '_document',
+  'layout',
 ];
