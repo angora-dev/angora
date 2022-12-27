@@ -1,0 +1,26 @@
+{
+  "/": {
+    "fetch": [
+      {
+        "url": "/api/world"
+      },
+      {
+        "url": "/api/universe"
+      }
+    ]
+  },
+  "/universe": {
+    "fetch": [
+      {
+        "url": "/api/universe"
+      }
+    ]
+  },
+  "/world": {
+    "fetch": [
+      {
+        "url": "/api/world"
+      }
+    ]
+  }
+}

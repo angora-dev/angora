@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo, useRef } from 'react';
 
 import { AngoraData } from '../models/angora-data';
 import { AngoraFetchData } from '../models/angora-fetch-data';
@@ -16,12 +16,20 @@ export function getFetchHook(fetchData: AngoraFetchData) {
     const internalFetchData = useMemo(() => fetchData, []);
     const { addFetchData, removeFetchData, getFetchInstance } = useContext(AngoraFetchContext);
     const fetchInstance = useMemo(() => getFetchInstance<T>(uuid, fetchData), [getFetchInstance]);
+    const setTimeoutRef = useRef<number | NodeJS.Timeout | undefined>();
 
     useEffect(function handleAddFetchData() {
-      addFetchData(uuid, internalFetchData);
+      if (setTimeoutRef.current) {
+        clearTimeout(setTimeoutRef.current);
+        setTimeoutRef.current = undefined;
+      } else {
+        addFetchData(uuid, internalFetchData);
+      }
 
       return function handleRemoveFetchData() {
-        removeFetchData(uuid);
+        setTimeoutRef.current = setTimeout(() => {
+          removeFetchData(uuid);
+        }, 0);
       };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

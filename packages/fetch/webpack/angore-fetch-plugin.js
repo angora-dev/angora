@@ -100,7 +100,7 @@ class AngoraFetchPlugin {
 
     const allPages = { ...edgeServerPages, ...nodeServerPages };
 
-    assets[`${!this.dev && !this.isEdgeRuntime ? '../' : ''}` + ANGORA_MANIFEST] = new sources.RawSource(
+    assets[`${!this.dev && !this.isEdgeRuntime ? '../' : ''}../../public/` + ANGORA_MANIFEST] = new sources.RawSource(
       JSON.stringify(allPages, null, 2)
     );
   }
