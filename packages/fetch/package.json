@@ -1,6 +1,6 @@
 {
   "name": "@angora/fetch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "url": "https://github.com/angora-dev/angora/issues",
   "author": {
     "name": "Mertin Dervish",
@@ -27,7 +27,8 @@
     "dev:main": "vite --config main-vite.config.js build --watch",
     "dev:next": "vite --config next-vite.config.js build --watch",
     "dev:ts": "tsc -b --watch",
-    "dev": "concurrently \"npm:dev:*\""
+    "dev": "concurrently \"npm:dev:*\"",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@angora/tsconfig": "*",
