@@ -1,10 +1,8 @@
-const AngoraFetchPlugin = require('./angore-fetch-plugin');
+import type { NextConfig } from 'next';
 
-/** @type {import('next').NextConfig} */
-const defaultNextConfig = {};
+import { AngoraFetchPlugin } from './angore-fetch-plugin';
 
-function withAngoraFetch(nextConfig = defaultNextConfig) {
-  /** @type {import('next').NextConfig} */
+export default function withAngoraFetch(nextConfig: NextConfig = {}) {
   const newNextConfig = {
     webpack: (config, { dev, nextRuntime }) => {
       const isEdgeServer = nextRuntime === 'edge';
@@ -23,9 +21,7 @@ function withAngoraFetch(nextConfig = defaultNextConfig) {
 
       return config;
     },
-  };
+  } satisfies NextConfig;
 
   return Object.assign({}, nextConfig, newNextConfig);
 }
-
-module.exports = withAngoraFetch;

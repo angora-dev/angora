@@ -1,6 +1,4 @@
-module.exports.ANGORA_MANIFEST = 'angora-manifest.json';
-
-module.exports.IGNORED_FILES = [
+export const IGNORED_ENTRYPOINT_FILES = [
   'webpack-runtime',
   'edge-runtime-webpack',
   'webpack-api-runtime',

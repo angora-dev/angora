@@ -3,9 +3,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
+    outDir: './dist/main',
     lib: {
       entry: resolve(__dirname, 'lib/main.ts'),
-      name: 'AngoraFetch',
       fileName: 'main',
       formats: ['es', 'cjs'],
     },

@@ -2,5 +2,6 @@
 lib
 
 # build tools
-vite.config.js
+main-vite.config.js
+next-vite.config.js
 tsconfig.json

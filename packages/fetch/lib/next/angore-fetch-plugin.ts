@@ -1,28 +1,36 @@
-const webpack = require('webpack');
+import { extractExportedConstValue, UnsupportedValueError } from 'next/dist/build/analysis/extract-const-value';
+import { parseModule } from 'next/dist/build/analysis/parse-module';
+import Log from 'next/dist/build/output/log';
+import getRouteFromEntrypoint from 'next/dist/server/get-route-from-entrypoint';
+import { normalizePathSep } from 'next/dist/shared/lib/page-path/normalize-path-sep';
+import type { Compilation, Compiler } from 'webpack';
+import webpack from 'webpack';
 
-const { getRouteFromEntrypoint, parseModule, normalizePathSep } = require('./utils');
-const { ANGORA_MANIFEST, IGNORED_FILES } = require('./constants');
-const { sources } = require('webpack');
-const { extractExportedConstValue, UnsupportedValueError } = require('./extract-const-value.util');
-const Log = require('next/dist/build/output/log'); //'../output/log'
+import { ANGORA_MANIFEST_FILE_NAME } from '../constants';
+import { AngoraManifest } from '../models/angora-manifest';
+import { IGNORED_ENTRYPOINT_FILES } from './next.constants';
 
 let edgeServerPages = {};
 let nodeServerPages = {};
 
-class AngoraFetchPlugin {
-  constructor({ dev, isEdgeRuntime, appDirEnabled }) {
+export class AngoraFetchPlugin {
+  protected dev: boolean;
+  protected isEdgeRuntime: boolean;
+  protected appDirEnabled: boolean;
+
+  constructor({ dev, isEdgeRuntime, appDirEnabled }: { dev: boolean; isEdgeRuntime: boolean; appDirEnabled: boolean }) {
     this.dev = dev;
     this.isEdgeRuntime = isEdgeRuntime;
     this.appDirEnabled = appDirEnabled;
   }
 
-  async createAssets(compilation, assets) {
+  async createAssets(compilation: Compilation, assets: Compilation['assets']) {
     // STEP 1: Get pageFilePath paths.
     const entrypoints = compilation.entrypoints;
-    const pages = {};
+    const pages: AngoraManifest = {};
 
     for (const entrypoint of entrypoints.values()) {
-      const pagePath = getRouteFromEntrypoint(entrypoint.name, this.appDirEnabled);
+      const pagePath = getRouteFromEntrypoint(entrypoint.name as string, this.appDirEnabled);
 
       if (!pagePath) {
         continue;
@@ -32,7 +40,8 @@ class AngoraFetchPlugin {
         .getFiles()
         .filter(
           (pageFilePath) =>
-            !IGNORED_FILES.some((ignoredFile) => pageFilePath.includes(ignoredFile)) && pageFilePath.endsWith('.js')
+            !IGNORED_ENTRYPOINT_FILES.some((ignoredFile) => pageFilePath.includes(ignoredFile)) &&
+            pageFilePath.endsWith('.js')
         );
 
       if (!files.length) {
@@ -53,7 +62,10 @@ class AngoraFetchPlugin {
       // STEP 2: Get source code.
       let source = '';
 
-      for (const currentModule of entrypoint._modulePostOrderIndices.keys()) {
+      // @ts-expect-error
+      const modules = entrypoint._modulePostOrderIndices.keys(); // TODO: Find a better way of gettings modules
+
+      for (const currentModule of modules) {
         const currentSource = currentModule.originalSource()?.source?.();
 
         if (currentSource) {
@@ -100,12 +112,11 @@ class AngoraFetchPlugin {
 
     const allPages = { ...edgeServerPages, ...nodeServerPages };
 
-    assets[`${!this.dev && !this.isEdgeRuntime ? '../' : ''}../../public/` + ANGORA_MANIFEST] = new sources.RawSource(
-      JSON.stringify(allPages, null, 2)
-    );
+    assets[`${!this.dev && !this.isEdgeRuntime ? '../' : ''}../../public/` + ANGORA_MANIFEST_FILE_NAME] =
+      new webpack.sources.RawSource(JSON.stringify(allPages, null, 2));
   }
 
-  apply(compiler) {
+  apply(compiler: Compiler) {
     compiler.hooks.make.tap('AngoraFetch', (compilation) => {
       compilation.hooks.processAssets.tapPromise(
         {
@@ -119,5 +130,3 @@ class AngoraFetchPlugin {
     });
   }
 }
-
-module.exports = AngoraFetchPlugin;

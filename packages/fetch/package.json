@@ -1,29 +1,39 @@
 {
   "name": "@angora/fetch",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "url": "https://github.com/angora-dev/angora/issues",
+  "author": {
+    "name": "Mertin Dervish",
+    "email": "mertindervish@gmail.com",
+    "url": "https://mertindervish.com"
+  },
   "files": ["dist"],
-  "types": "./lib/main.d.ts",
-  "main": "./dist/main.cjs",
+  "types": "./lib/index.d.ts",
+  "main": "./dist/main.js",
   "exports": {
     ".": {
-      "import": "./dist/main.js",
-      "require": "./dist/main.cjs",
-      "default": "./dist/main.cjs"
+      "import": "./dist/main/main.mjs",
+      "require": "./dist/main/main.js",
+      "default": "./dist/main/main.js"
     },
-    "./webpack/with-angora-fetch": {
-      "require": "./lib/webpack/with-angora-fetch.js",
-      "default": "./lib/webpack/with-angora-fetch.js"
-    }
+    "./with-angora-fetch": "./dist/next/with-angora-fetch.js"
   },
   "license": "MIT",
   "scripts": {
     "lint": "TIMING=1 eslint \"**/*.ts*\"",
-    "build": "vite build && tsc -b"
+    "build:main": "vite --config main-vite.config.js build",
+    "build:next": "vite --config next-vite.config.js build",
+    "build": "npm run build:main && npm run build:next && tsc -b",
+    "dev:main": "vite --config main-vite.config.js build --watch",
+    "dev:next": "vite --config next-vite.config.js build --watch",
+    "dev:ts": "tsc -b --watch",
+    "dev": "concurrently \"npm:dev:*\""
   },
   "devDependencies": {
     "@angora/tsconfig": "*",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
+    "concurrently": "7.6.0",
     "eslint": "8.30.0",
     "eslint-config-custom": "*",
     "react": "18.2.0",
