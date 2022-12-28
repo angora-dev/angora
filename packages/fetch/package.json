@@ -1,11 +1,24 @@
 {
   "name": "@angora/fetch",
   "version": "0.0.0",
-  "main": "./index.tsx",
-  "types": "./index.tsx",
+  "files": ["dist"],
+  "types": "./lib/main.d.ts",
+  "main": "./dist/main.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs",
+      "default": "./dist/main.cjs"
+    },
+    "./webpack/with-angora-fetch": {
+      "require": "./lib/webpack/with-angora-fetch.js",
+      "default": "./lib/webpack/with-angora-fetch.js"
+    }
+  },
   "license": "MIT",
   "scripts": {
-    "lint": "TIMING=1 eslint \"**/*.ts*\""
+    "lint": "TIMING=1 eslint \"**/*.ts*\"",
+    "build": "vite build && tsc -b"
   },
   "devDependencies": {
     "@angora/tsconfig": "*",
@@ -15,6 +28,7 @@
     "eslint-config-custom": "*",
     "react": "18.2.0",
     "typescript": "4.9.4",
-    "webpack": "5.75.0"
+    "webpack": "5.75.0",
+    "vite": "4.0.3"
   }
 }

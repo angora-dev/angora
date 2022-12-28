@@ -1,4 +1,4 @@
-import { AngoraFetchHookData } from '@angora/fetch/react/fetch.models';
+import type { AngoraFetchHookData } from '@angora/fetch';
 
 type ResponseData = { hello: string };
 

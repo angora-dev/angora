@@ -1,5 +1,16 @@
 {
   "extends": "@angora/tsconfig/react-library.json",
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
+  "include": ["./lib/main.ts"],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": false,
+    "isolatedModules": false,
+    "out": "dist/main.d.ts",
+    "baseUrl": "./lib",
+    "paths": {
+      "@angora/fetch": ["/"],
+    }
+  }
 }
