@@ -1,5 +1,6 @@
 # source code
 lib
+!lib/index.d.ts
 
 # build tools
 main-vite.config.js

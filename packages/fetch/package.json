@@ -1,13 +1,13 @@
 {
   "name": "@angora/fetch",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "url": "https://github.com/angora-dev/angora/issues",
   "author": {
     "name": "Mertin Dervish",
     "email": "mertindervish@gmail.com",
     "url": "https://mertindervish.com"
   },
-  "files": ["dist"],
+  "files": ["dist", "lib/index.d.ts"],
   "types": "./lib/index.d.ts",
   "main": "./dist/main.js",
   "exports": {
