@@ -12,8 +12,6 @@ export function getFetchHooks(data: AngoraData) {
 export function getFetchHook(fetchData: AngoraFetchData) {
   const uuid = getRandomUUID();
 
-  console.log(uuid);
-
   function useFetch<T = unknown>() {
     const internalFetchData = useMemo(() => fetchData, []);
     const { addFetchData, removeFetchData, getFetchInstance } = useContext(AngoraFetchContext);
