@@ -1,7 +1,10 @@
 {
   "name": "@angora/fetch",
-  "version": "0.0.5",
-  "url": "https://github.com/angora-dev/angora/issues",
+  "version": "0.0.7",
+  "description": "Blazingly Fast Data Fetching 🔥",
+  "homepage": "https://fetch.angora.dev",
+  "repository": "angora-dev/angora",
+  "bugs": "https://github.com/angora-dev/angora/issues",
   "author": {
     "name": "Mertin Dervish",
     "email": "mertindervish@gmail.com",
