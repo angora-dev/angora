@@ -5,10 +5,11 @@
   </a>
 </p>
 
-# Introduction
-
 > **Warning**
+>
 > The package is not __*production ready*__, yet.
+
+# Introduction
 
 🔥 Angora Fetch will make your dynamic client-side data fetching __*Blazingly*__ 
 fast.
