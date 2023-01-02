@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 
-import { AngoraFetchPlugin } from './angore-fetch-plugin';
+import { AngoraFetchPlugin } from './angora-fetch-plugin';
 
 export default function withAngoraFetch(nextConfig: NextConfig = {}) {
   const newNextConfig = {
