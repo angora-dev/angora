@@ -1,0 +1,30 @@
+{
+  "name": "@angora/fetch-docs",
+  "version": "0.0.1",
+  "description": "Angora Fetch's documentation",
+  "url": "https://github.com/angora-dev/angora/issues",
+  "author": {
+    "name": "Mertin Dervish",
+    "email": "mertindervish@gmail.com",
+    "url": "https://mertindervish.com"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "next": "13.1.1",
+    "nextra": "2.0.3",
+    "nextra-theme-docs": "2.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@angora/tsconfig": "*",
+    "@types/node": "18.11.18",
+    "eslint-config-angora": "*",
+    "typescript": "4.9.4"
+  }
+}

@@ -1,0 +1,121 @@
+import { Callout, Tab, Tabs } from 'nextra-theme-docs'
+
+# Getting Started
+
+<Callout type="warning" emoji="⚠️">
+  The package is not __*production ready*__, yet.
+</Callout>
+
+<div className="steps-container">
+
+### Install
+
+Inside your Next.js project directory, run the following:
+
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tab>
+    ```bash
+    pnpm i @angora/fetch
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    npm i @angora/fetch
+    ```
+  </Tab>
+  <Tab>
+    ```bash
+    yarn add @angora/fetch
+    ```
+  </Tab>
+</Tabs>
+
+### Update config
+
+Update `next.config.js` to add `withAngoraFetch`:
+
+```javascript filename="next.config.js" {1,8} 
+const withAngoraFetch = require('@angora/fetch/with-angora-fetch');
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+};
+
+module.exports = withAngoraFetch(nextConfig);
+```
+
+### Middleware
+
+Update or create `middleware.js` (or `middleware.ts` if you use TypeScript) to 
+call `setAngoraFetchHeaders`:
+
+```typescript filename="middleware.ts" {4,8}
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
+
+import { setAngoraFetchHeaders } from '@angora/fetch';
+
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next();
+  await setAngoraFetchHeaders(req, res);
+  return res;
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|favicon.ico|sw.js).*)'],
+};
+```
+
+### Provider
+
+Update or create `pages/_app.js` (or `pages/_app.tsx` if you use TypeScript) to 
+add `AngoraFetchProvider`:
+
+```tsx filename="pages/_app.tsx" {4,8,10}
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+
+import { AngoraFetchProvider } from '@angora/fetch';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <AngoraFetchProvider>
+      <Component {...pageProps} />
+    </AngoraFetchProvider>
+  );
+}
+```
+
+### That's it! You can now use it on any page
+
+```tsx filename="pages/index.tsx"
+import { getFetchHooks } from '@angora/fetch';
+// Same rules as Next.js' `config` applies to the `angora` constant.
+export const angora = {
+  fetch: [{ url: '/api/hello-world' }],
+};
+// `getFetchHooks` returns React.js hooks
+// inspired by TanStack Query and SWR.
+const [useHelloWorld] = getFetchHooks(angora);
+
+type HelloWorldResponse = { greeting: string };
+
+export default function HomePage() {
+  const helloWorldData = useHelloWorld<HelloWorldResponse>();
+  const { body, error, isFetching, isOK, status } = helloWorldData;
+
+  if (isFetching) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
+  if (!isOK) return <p>{status?.text ?? 'Oops!'}</p>;
+
+  return <p>{body.greeting}</p>;
+}
+```
+
+</div>
+
+## CodeSandbox
+
+There is also a CodeSandbox that you can fork and start experimenting faster: 
+https://codesandbox.io/p/sandbox/angora-fetch-example-with-next-js-b5l1qz
