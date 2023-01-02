@@ -1,6 +1,6 @@
 {
   "name": "@angora/fetch",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Blazingly Fast Data Fetching 🔥",
   "homepage": "https://fetch.angora.dev",
   "repository": "angora-dev/angora",
