@@ -21,6 +21,7 @@ without sacrificing the developer experience.
 ## Getting Started
 
 Visit <a aria-label="angora fetch learn" href="https://fetch.angora.dev" target="_blank">https://fetch.angora.dev</a> to get started with Angora Fetch.
+
 ## Authors
 
 - Mertin Dervish ([@mertindervish](https://twitter.com/mertindervish))
