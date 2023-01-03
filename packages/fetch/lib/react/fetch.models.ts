@@ -1,9 +1,10 @@
 import { AngoraFetchData } from '../models/angora-fetch-data';
+import { Subscribe } from './store.models';
 
-export type AngoraFetchContextData = {
+export type AngoraFetchContextData<T = unknown> = {
   addFetchData: (uuid: string, fetchData: AngoraFetchData) => void;
   removeFetchData: (uuid: string) => void;
-  getFetchInstance: <T = unknown>(uuid: string, fetchData: AngoraFetchData) => AngoraFetchInstance<T>;
+  subscribe: Subscribe<T>;
 };
 
 export type AngoraResponseStatus = {
@@ -35,5 +36,3 @@ export type AngoraFetchInstance<T = unknown> = {
   fetchData: AngoraFetchData;
   hookData: AngoraFetchHookData<T>;
 };
-
-export type AngoraFetchInstanceMap<T = unknown> = Map<string, AngoraFetchInstance<T>>;

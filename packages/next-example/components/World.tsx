@@ -9,12 +9,9 @@ type WorldProps = {
 export function World({ useWorld }: WorldProps) {
   const { body, error, isFetching, isOK, status } = useWorld();
 
-  return (
-    <>
-      {isFetching && <p>Loading...</p>}
-      {Boolean(error) && <p>{error?.message}</p>}
-      {!isOK && status !== null && <p>{status.text}</p>}
-      {isOK && <p>{body.hello}</p>}
-    </>
-  );
+  if (isFetching) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
+  if (!isOK) return <p>{status?.text ?? 'Oops!'}</p>;
+
+  return <p>{body.hello}</p>;
 }
