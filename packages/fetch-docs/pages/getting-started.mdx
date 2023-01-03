@@ -93,7 +93,7 @@ export default function App({ Component, pageProps }: AppProps) {
 import { getFetchHooks } from '@angora/fetch';
 // Same rules as Next.js' `config` applies to the `angora` constant.
 export const angora = {
-  fetch: [{ url: '/api/hello-world' }],
+  fetch: ['/api/hello-world'],
 };
 // `getFetchHooks` returns React.js hooks
 // inspired by TanStack Query and SWR.

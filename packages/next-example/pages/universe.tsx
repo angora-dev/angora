@@ -3,7 +3,7 @@ import { getFetchHooks } from '@angora/fetch';
 import { Universe } from '../components/Universe';
 
 export const angora = {
-  fetch: [{ url: '/api/universe' }],
+  fetch: ['/api/universe'],
 };
 
 const [useUniverse] = getFetchHooks(angora);

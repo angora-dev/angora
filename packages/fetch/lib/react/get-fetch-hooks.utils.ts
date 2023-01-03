@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo, useRef } from 'react';
 
 import { AngoraData } from '../models/angora-data';
 import { AngoraFetchData } from '../models/angora-fetch-data';
-import { getRandomUUID } from '../utils/crypto.util';
+import { getRandomUUID } from '../utils/crypto.utils';
 import { AngoraFetchContext } from './fetch.context';
 
 export function getFetchHooks(data: AngoraData) {

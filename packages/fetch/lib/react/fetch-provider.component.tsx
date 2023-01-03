@@ -2,6 +2,7 @@ import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 
 import { DEFAULT_FETCH_OPTIONS } from '../constants';
 import { AngoraFetchData } from '../models/angora-fetch-data';
+import { getFetchDataUrl } from '../models/models.utils';
 import { AngoraFetchContext } from './fetch.context';
 import { AngoraFetchHookData, AngoraFetchInstance, AngoraFetchInstanceMap } from './fetch.models';
 import { createFetchInstance, unwrapResponse } from './fetch.utils';
@@ -48,7 +49,8 @@ export function AngoraFetchProvider({ children }: AngoraFetchProviderProps) {
 
     try {
       const fetchOptions: RequestInit = { ...DEFAULT_FETCH_OPTIONS, signal: abortController.signal };
-      const response = await fetch(fetchData.url, fetchOptions);
+      const url = getFetchDataUrl(fetchData);
+      const response = await fetch(url, fetchOptions);
       const body = await unwrapResponse<T>(response);
 
       updateHookData<T>(uuid, (hookData) => {

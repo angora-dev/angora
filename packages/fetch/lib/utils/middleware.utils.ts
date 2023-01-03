@@ -4,6 +4,7 @@ import type { NextRequest, NextResponse } from 'next/server';
 import { ANGORA_MANIFEST_FILE_NAME } from '../constants';
 import { AngoraData } from '../models/angora-data';
 import { AngoraManifest } from '../models/angora-manifest';
+import { getFetchDataUrl } from '../models/models.utils';
 
 async function getManifest(nextUrl: NextURL) {
   let origin = nextUrl.origin;
@@ -30,7 +31,7 @@ function getPreloadLinkHeaderValue(data: AngoraData) {
   }
 
   return data.fetch
-    .map((fetchData) => `<${fetchData.url}>; rel=preload; as=fetch; crossorigin=use-credentials;`)
+    .map((fetchData) => `<${getFetchDataUrl(fetchData)}>; rel=preload; as=fetch; crossorigin=use-credentials;`)
     .join(', ');
 }
 

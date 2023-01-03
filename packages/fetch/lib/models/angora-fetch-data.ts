@@ -1,3 +1,5 @@
-export type AngoraFetchData = {
-  url: string;
-};
+export type AngoraFetchData =
+  | string
+  | {
+      url: string;
+    };
