@@ -19,15 +19,22 @@
       "require": "./dist/main/main.js",
       "default": "./dist/main/main.js"
     },
-    "./with-angora-fetch": "./dist/next/with-angora-fetch.js"
+    "./next": {
+      "import": "./dist/next/web.mjs",
+      "require": "./dist/next/web.js",
+      "default": "./dist/next/web.js"
+    },
+    "./next/with-angora-fetch": "./dist/with-angora-fetch/with-angora-fetch.js"
   },
   "license": "MIT",
   "scripts": {
     "lint": "TIMING=1 eslint \"**/*.ts*\"",
     "build:main": "vite --config main-vite.config.js build",
+    "build:with-angora-fetch": "vite --config with-angora-fetch-vite.config.js build",
     "build:next": "vite --config next-vite.config.js build",
-    "build": "npm run build:main && npm run build:next && tsc -b",
+    "build": "concurrently \"npm:build:*\" && tsc -b",
     "dev:main": "vite --config main-vite.config.js build --watch",
+    "dev:with-angora-fetch": "vite --config with-angora-fetch-vite.config.js build --watch",
     "dev:next": "vite --config next-vite.config.js build --watch",
     "dev:ts": "tsc -b --watch",
     "dev": "concurrently \"npm:dev:*\"",
@@ -45,5 +52,8 @@
     "typescript": "4.9.4",
     "webpack": "5.75.0",
     "vite": "4.0.3"
+  },
+  "dependencies": {
+    "urlpattern-polyfill": "6.0.2"
   }
 }

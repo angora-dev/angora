@@ -5,5 +5,5 @@ export const config = {
 };
 
 export default async function handler() {
-  return NextResponse.json({ hello: 'Hello, Universe!' }, { status: 200 });
+  return NextResponse.json({ hello: 'Hello, Universe!' });
 }

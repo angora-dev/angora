@@ -2,6 +2,8 @@ import type { NextConfig } from 'next';
 
 import { AngoraFetchPlugin } from './angora-fetch-plugin';
 
+import 'urlpattern-polyfill';
+
 export default function withAngoraFetch(nextConfig: NextConfig = {}) {
   const newNextConfig = {
     webpack: (config, { dev, nextRuntime }) => {

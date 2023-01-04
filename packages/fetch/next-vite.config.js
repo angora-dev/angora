@@ -6,29 +6,21 @@ export default defineConfig({
   build: {
     outDir: './dist/next',
     lib: {
-      entry: resolve(__dirname, 'lib/next/with-angora-fetch.ts'),
-      fileName: 'with-angora-fetch',
-      formats: ['cjs'],
+      entry: resolve(__dirname, 'lib/next/web.ts'),
+      fileName: 'web',
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
       external: [
+        'react',
+        'react/jsx-runtime',
         'crypto',
-        'webpack',
-        'stream',
-        'util',
-        'fs',
-        'buffer',
-        'path',
-        'os',
-        'next/dist/build/analysis/extract-const-value',
-        'next/dist/build/analysis/parse-module',
-        'next/dist/build/output/log',
-        'next/dist/shared/lib/page-path/normalize-path-sep',
+        'next/router',
+        'next/dist/shared/lib/router/utils/sorted-routes',
+        'next/dist/shared/lib/router/utils/route-regex',
+        'next/dist/shared/lib/router/utils/remove-trailing-slash',
       ],
       plugins: [analyze()],
-    },
-    commonjsOptions: {
-      ignoreDynamicRequires: true,
     },
   },
 });

@@ -1,4 +1,4 @@
-import { getFetchHooks } from '@angora/fetch';
+import { getFetchHooks } from '@angora/fetch/next';
 
 import { World } from '../../components/World';
 
@@ -7,9 +7,5 @@ const [useWorld] = getFetchHooks({
 });
 
 export default function WorldPage() {
-  return (
-    <>
-      <World useWorld={useWorld} />
-    </>
-  );
+  return <World useWorld={useWorld} />;
 }

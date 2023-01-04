@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import analyze from 'rollup-plugin-analyzer';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -10,7 +11,8 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: ['react', 'crypto'],
+      external: ['react', 'react/jsx-runtime', 'crypto', 'next/router'],
+      plugins: [analyze()],
     },
   },
 });

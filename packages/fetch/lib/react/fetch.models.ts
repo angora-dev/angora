@@ -1,10 +1,10 @@
-import { AngoraFetchData } from '../models/angora-fetch-data';
+import { ParsedAngoraFetchData } from '../models/angora-fetch-data';
 import { Subscribe } from './store.models';
 
-export type AngoraFetchContextData<T = unknown> = {
-  addFetchData: (uuid: string, fetchData: AngoraFetchData) => void;
+export type AngoraFetchContextData<TBody = unknown> = {
+  addFetchData: (uuid: string, fetchData: ParsedAngoraFetchData) => void;
   removeFetchData: (uuid: string) => void;
-  subscribe: Subscribe<T>;
+  subscribe: Subscribe<TBody>;
 };
 
 export type AngoraResponseStatus = {
@@ -12,27 +12,27 @@ export type AngoraResponseStatus = {
   text: string;
 };
 
-type BaseAngoraFetchHookData<T = unknown> = {
-  body: T | null;
+type BaseAngoraFetchHookData<TBody = unknown> = {
+  body: TBody | null;
   error: Error | null;
   isFetching: boolean;
   isOK: boolean;
   status: AngoraResponseStatus | null;
 };
 
-type OKAngoraFetchHookData<T = unknown> = Omit<BaseAngoraFetchHookData<T>, 'body' | 'isOK'> & {
-  body: T;
+type OKAngoraFetchHookData<TBody = unknown> = Omit<BaseAngoraFetchHookData<TBody>, 'body' | 'isOK'> & {
+  body: TBody;
   isOK: true;
 };
 
-type NotOKAngoraFetchHookData<T = unknown> = Omit<BaseAngoraFetchHookData<T>, 'body' | 'isOK'> & {
-  body: T | null;
+type NotOKAngoraFetchHookData<TBody = unknown> = Omit<BaseAngoraFetchHookData<TBody>, 'body' | 'isOK'> & {
+  body: TBody | null;
   isOK: false;
 };
 
-export type AngoraFetchHookData<T = unknown> = OKAngoraFetchHookData<T> | NotOKAngoraFetchHookData<T>;
+export type AngoraFetchHookData<TBody = unknown> = OKAngoraFetchHookData<TBody> | NotOKAngoraFetchHookData<TBody>;
 
-export type AngoraFetchInstance<T = unknown> = {
-  fetchData: AngoraFetchData;
-  hookData: AngoraFetchHookData<T>;
+export type AngoraFetchInstance<TBody = unknown> = {
+  fetchData: ParsedAngoraFetchData;
+  hookData: AngoraFetchHookData<TBody>;
 };

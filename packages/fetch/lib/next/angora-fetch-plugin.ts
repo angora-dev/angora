@@ -9,6 +9,7 @@ import webpack from 'webpack';
 import { ANGORA_MANIFEST_FILE_NAME } from '../constants';
 import { AngoraManifest } from '../models/angora-manifest';
 import { IGNORED_ENTRYPOINT_FILES } from './next.constants';
+import { parseNextAngoraManifest } from './next.utils';
 
 let edgeServerPages = {};
 let nodeServerPages = {};
@@ -48,7 +49,7 @@ export class AngoraFetchPlugin {
         continue;
       }
 
-      // Write filename, replace any backslashes in path (on windows) with forwardslashes for cross-platform consistency.
+      // Write filename, replace any backslashes in path (on windows) with forward slashes for cross-platform consistency.
       let pageFilePath = files[files.length - 1];
 
       if (!this.dev) {
@@ -63,7 +64,7 @@ export class AngoraFetchPlugin {
       let source = '';
 
       // @ts-expect-error
-      const modules = entrypoint._modulePostOrderIndices.keys(); // TODO: Find a better way of gettings modules
+      const modules = entrypoint._modulePostOrderIndices.keys(); // TODO: Find a better way of getting modules
 
       for (const currentModule of modules) {
         const currentSource = currentModule.originalSource()?.source?.();
@@ -110,10 +111,10 @@ export class AngoraFetchPlugin {
       nodeServerPages = pages;
     }
 
-    const allPages = { ...edgeServerPages, ...nodeServerPages };
+    const angoraManifest = parseNextAngoraManifest({ ...edgeServerPages, ...nodeServerPages });
 
     assets[`${!this.dev && !this.isEdgeRuntime ? '../' : ''}../../public/` + ANGORA_MANIFEST_FILE_NAME] =
-      new webpack.sources.RawSource(JSON.stringify(allPages, null, 2));
+      new webpack.sources.RawSource(JSON.stringify(angoraManifest, null, 2) + '\n');
   }
 
   apply(compiler: Compiler) {

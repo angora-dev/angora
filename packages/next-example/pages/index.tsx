@@ -1,4 +1,4 @@
-import { getFetchHooks } from '@angora/fetch';
+import { getFetchHooks } from '@angora/fetch/next';
 
 import { Universe } from '../components/Universe';
 import { World } from '../components/World';

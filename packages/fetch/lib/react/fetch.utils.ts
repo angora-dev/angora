@@ -1,9 +1,9 @@
-import { AngoraFetchData } from '../models/angora-fetch-data';
+import { ParsedAngoraFetchData } from '../models/angora-fetch-data';
 import { AngoraFetchHookData, AngoraResponseStatus } from './fetch.models';
 import { AngoraFetchInstance } from './fetch.models';
 
-export function createFetchHookData<T = unknown>(
-  body?: T | null,
+export function createFetchHookData<TBody = unknown>(
+  body?: TBody | null,
   error?: Error | null,
   isFetching = true,
   isOK = false,
@@ -15,22 +15,22 @@ export function createFetchHookData<T = unknown>(
     isFetching,
     isOK,
     status,
-  } as AngoraFetchHookData<T>;
+  } as AngoraFetchHookData<TBody>;
 }
 
-export function createFetchInstance<T = unknown>(fetchData: AngoraFetchData) {
+export function createFetchInstance<TBody = unknown>(fetchData: ParsedAngoraFetchData) {
   return {
     fetchData,
-    hookData: createFetchHookData<T>(),
-  } satisfies AngoraFetchInstance<T>;
+    hookData: createFetchHookData<TBody>(),
+  } satisfies AngoraFetchInstance<TBody>;
 }
 
-export async function unwrapResponse<T = unknown>(response: Response): Promise<T> {
+export async function unwrapResponse<TBody = unknown>(response: Response): Promise<TBody> {
   const contentType = response.headers.get('content-type');
 
   if (contentType && contentType.indexOf('application/json') !== -1) {
     return await response.json();
   }
 
-  return (await response.text()) as unknown as Promise<T>;
+  return (await response.text()) as unknown as Promise<TBody>;
 }
