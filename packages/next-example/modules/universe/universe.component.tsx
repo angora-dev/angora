@@ -1,9 +1,9 @@
 import type { AngoraFetchHookData } from '@angora/fetch';
 
-type ResponseData = { hello: string };
+import type { UniverseResponseBody } from './universe.models';
 
 type UniverseProps = {
-  useUniverse: () => AngoraFetchHookData<ResponseData>;
+  useUniverse: () => AngoraFetchHookData<UniverseResponseBody>;
 };
 
 export function Universe({ useUniverse }: UniverseProps) {

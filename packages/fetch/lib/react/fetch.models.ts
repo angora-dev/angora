@@ -36,3 +36,9 @@ export type AngoraFetchInstance<TBody = unknown> = {
   fetchData: ParsedAngoraFetchData;
   hookData: AngoraFetchHookData<TBody>;
 };
+
+export type AngoraFetchHook<TBody = unknown> = () => AngoraFetchHookData<TBody>;
+
+export type AngoraFetchHooks<TFetchBodyArray extends ReadonlyArray<unknown> = unknown[]> = {
+  [K in keyof TFetchBodyArray]: AngoraFetchHook<TFetchBodyArray[K]>;
+};

@@ -1,8 +1,9 @@
 import { getFetchHooks } from '@angora/fetch/next';
 
-import { Universe } from '../../components/Universe';
+import { Universe } from '../../modules/universe/universe.component';
+import type { UniverseResponseBody } from '../../modules/universe/universe.models';
 
-const [useUniverse] = getFetchHooks({
+const [useUniverse] = getFetchHooks<[UniverseResponseBody]>({
   fetch: [{ url: '/api/universe' }],
 });
 

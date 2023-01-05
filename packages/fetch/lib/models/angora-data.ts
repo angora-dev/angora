@@ -1,5 +1,16 @@
-import { AngoraFetchData } from './angora-fetch-data';
+import { AngoraFetchData, ParsedAngoraFetchData, ShortAngoraFetchData } from './angora-fetch-data';
 
-export type AngoraData<TFetchData extends AngoraFetchData = AngoraFetchData> = {
-  fetch: TFetchData[];
+export type AngoraData<
+  TFetchData extends AngoraFetchData = AngoraFetchData,
+  TFetchBodyArray extends ReadonlyArray<unknown> = unknown[]
+> = {
+  fetch:
+    | {
+        [K in keyof TFetchBodyArray]: TFetchData extends ParsedAngoraFetchData
+          ? ParsedAngoraFetchData<TFetchBodyArray[K]>
+          : TFetchData extends ShortAngoraFetchData
+          ? ShortAngoraFetchData<TFetchData>
+          : AngoraFetchData<TFetchBodyArray[K]>;
+      }
+    | TFetchData[];
 };

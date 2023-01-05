@@ -1,9 +1,9 @@
 import type { AngoraFetchHookData } from '@angora/fetch';
 
-type ResponseData = { hello: string };
+import type { WorldResponseBody } from './world.models';
 
 type WorldProps = {
-  useWorld: () => AngoraFetchHookData<ResponseData>;
+  useWorld: () => AngoraFetchHookData<WorldResponseBody>;
 };
 
 export function World({ useWorld }: WorldProps) {

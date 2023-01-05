@@ -4,12 +4,14 @@ export const angora = {
   fetch: ['/api/greeting/[...names]'],
 };
 
-type ResponseData = { names: string[] };
+type MultiGreetingResponseBody = {
+  names: string[];
+};
 
-const [useGreeting] = getFetchHooks(angora);
+const [useMultiGreeting] = getFetchHooks<[MultiGreetingResponseBody]>(angora);
 
 export default function MultiGreetingPage() {
-  const { body, error, isFetching, isOK, status } = useGreeting<ResponseData>();
+  const { body, error, isFetching, isOK, status } = useMultiGreeting();
 
   if (isFetching) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;

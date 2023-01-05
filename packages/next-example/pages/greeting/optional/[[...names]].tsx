@@ -4,12 +4,14 @@ export const angora = {
   fetch: ['/api/greeting/optional/[[...names]]'],
 };
 
-type ResponseData = { names: string[] };
+type OptionalMultiGreetingResponseBody = {
+  names: string[];
+};
 
-const [useGreeting] = getFetchHooks(angora);
+const [useOptionalMultiGreeting] = getFetchHooks<[OptionalMultiGreetingResponseBody]>(angora);
 
 export default function OptionalMultiGreetingPage() {
-  const { body, error, isFetching, isOK, status } = useGreeting<ResponseData>();
+  const { body, error, isFetching, isOK, status } = useOptionalMultiGreeting();
 
   if (isFetching) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;

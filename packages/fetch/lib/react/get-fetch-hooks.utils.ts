@@ -4,17 +4,19 @@ import { AngoraData } from '../models/angora-data';
 import { ParsedAngoraFetchData } from '../models/angora-fetch-data';
 import { getRandomUUID } from '../utils/crypto.utils';
 import { AngoraFetchContext } from './fetch.context';
-import { AngoraFetchContextData, AngoraFetchInstance } from './fetch.models';
+import { AngoraFetchContextData, AngoraFetchHook, AngoraFetchHooks, AngoraFetchInstance } from './fetch.models';
 import { createFetchHookData } from './fetch.utils';
 
-export function getFetchHooks(data: AngoraData<ParsedAngoraFetchData>) {
-  return data.fetch.map((fetchData) => getFetchHook(fetchData));
+export function getFetchHooks<TBodyArray extends ReadonlyArray<unknown> = unknown[]>(
+  data: AngoraData<ParsedAngoraFetchData, TBodyArray>
+): AngoraFetchHooks<TBodyArray> {
+  return data.fetch.map((fetchData) => getFetchHook(fetchData)) as AngoraFetchHooks<TBodyArray>;
 }
 
-export function getFetchHook(fetchData: ParsedAngoraFetchData) {
+export function getFetchHook<TParentBody = unknown>(fetchData: ParsedAngoraFetchData): AngoraFetchHook<TParentBody> {
   const uuid = getRandomUUID();
 
-  function useFetch<TBody = unknown>() {
+  function useFetch<TBody = TParentBody>() {
     const { addFetchData, removeFetchData, subscribe } = useContext<AngoraFetchContextData<AngoraFetchInstance<TBody>>>(
       AngoraFetchContext as Context<AngoraFetchContextData<AngoraFetchInstance<TBody>>>
     );

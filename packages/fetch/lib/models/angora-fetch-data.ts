@@ -7,11 +7,11 @@ type AngoraFetchParam = {
   source: AngoraFetchParamSource;
 };
 
-export type ShortAngoraFetchData = string;
+export type ShortAngoraFetchData<_TBody = unknown> = string;
 
-export type ParsedAngoraFetchData = {
+export type ParsedAngoraFetchData<_TBody = unknown> = {
   url: string;
   params?: { [paramName: string]: AngoraFetchParam };
 };
 
-export type AngoraFetchData = ShortAngoraFetchData | ParsedAngoraFetchData;
+export type AngoraFetchData<TBody = unknown> = ShortAngoraFetchData<TBody> | ParsedAngoraFetchData<TBody>;
