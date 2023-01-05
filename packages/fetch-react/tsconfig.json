@@ -1,0 +1,21 @@
+{
+  "extends": "@angora/tsconfig/react-library.json",
+  "include": ["./src/main.ts"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": false,
+    "isolatedModules": false,
+    "outDir": "./dist",
+    "paths": {
+      "@angora/fetch-react": ["./src"],
+    }
+  },
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true,
+  }
+}

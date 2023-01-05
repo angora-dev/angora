@@ -1,4 +1,4 @@
-const withAngoraFetch = require('@angora/fetch/next/with-angora-fetch');
+const { withAngoraFetch } = require('@angora/fetch/build');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

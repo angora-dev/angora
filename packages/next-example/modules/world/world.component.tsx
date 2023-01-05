@@ -1,12 +1,14 @@
-import type { AngoraFetchHookData } from '@angora/fetch';
+import { getFetchHooks } from '@angora/fetch';
 
 import type { WorldResponseBody } from './world.models';
 
-type WorldProps = {
-  useWorld: () => AngoraFetchHookData<WorldResponseBody>;
+export const angora = {
+  fetch: ['/api/world'],
 };
 
-export function World({ useWorld }: WorldProps) {
+const [useWorld] = getFetchHooks<[WorldResponseBody]>(angora);
+
+export function World() {
   const { body, error, isFetching, isOK, status } = useWorld();
 
   if (isFetching) return <p>Loading...</p>;

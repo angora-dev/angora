@@ -1,12 +1,14 @@
-import type { AngoraFetchHookData } from '@angora/fetch';
+import { getFetchHooks } from '@angora/fetch';
 
 import type { UniverseResponseBody } from './universe.models';
 
-type UniverseProps = {
-  useUniverse: () => AngoraFetchHookData<UniverseResponseBody>;
+export const angora = {
+  fetch: ['/api/universe'],
 };
 
-export function Universe({ useUniverse }: UniverseProps) {
+const [useUniverse] = getFetchHooks<[UniverseResponseBody]>(angora);
+
+export function Universe() {
   const { body, error, isFetching, isOK, status } = useUniverse();
 
   if (isFetching) return <p>Loading...</p>;

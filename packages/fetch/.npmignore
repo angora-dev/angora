@@ -1,8 +1,6 @@
 # source code
-lib
-!lib/index.d.ts
+src
 
 # build tools
-main-vite.config.js
-next-vite.config.js
+vite.config.js
 tsconfig.json

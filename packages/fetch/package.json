@@ -1,6 +1,6 @@
 {
   "name": "@angora/fetch",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Blazingly Fast Data Fetching 🔥",
   "homepage": "https://fetch.angora.dev",
   "repository": "angora-dev/angora",
@@ -10,37 +10,33 @@
     "email": "mertindervish@gmail.com",
     "url": "https://mertindervish.com"
   },
-  "files": ["dist", "lib/index.d.ts"],
-  "types": "./lib/index.d.ts",
-  "main": "./dist/main.js",
+  "files": ["dist"],
+  "types": "./dist/next/main.d.ts",
+  "main": "./dist/next.js",
   "exports": {
     ".": {
-      "import": "./dist/main/main.mjs",
-      "require": "./dist/main/main.js",
-      "default": "./dist/main/main.js"
+      "types": "./dist/next/main.d.ts",
+      "import": "./dist/next.mjs",
+      "require": "./dist/next.js",
+      "default": "./dist/next.js"
     },
-    "./next": {
-      "import": "./dist/next/web.mjs",
-      "require": "./dist/next/web.js",
-      "default": "./dist/next/web.js"
-    },
-    "./next/with-angora-fetch": "./dist/with-angora-fetch/with-angora-fetch.js"
+    "./build": {
+      "types": "./dist/build/main.d.ts",
+      "import": "./dist/build.mjs",
+      "require": "./dist/build.js",
+      "default": "./dist/build.js"
+    }
   },
   "license": "MIT",
   "scripts": {
     "lint": "TIMING=1 eslint \"**/*.ts*\"",
-    "build:main": "vite --config main-vite.config.js build",
-    "build:with-angora-fetch": "vite --config with-angora-fetch-vite.config.js build",
-    "build:next": "vite --config next-vite.config.js build",
-    "build": "concurrently \"npm:build:*\" && tsc -b",
-    "dev:main": "vite --config main-vite.config.js build --watch",
-    "dev:with-angora-fetch": "vite --config with-angora-fetch-vite.config.js build --watch",
-    "dev:next": "vite --config next-vite.config.js build --watch",
-    "dev:ts": "tsc -b --watch",
-    "dev": "concurrently \"npm:dev:*\"",
+    "build": "vite build",
+    "dev": "vite build --watch",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
+    "@angora/fetch-core": "*",
+    "@angora/fetch-react": "*",
     "@angora/tsconfig": "*",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
@@ -51,7 +47,7 @@
     "rollup-plugin-analyzer": "4.0.0",
     "typescript": "4.9.4",
     "webpack": "5.75.0",
-    "vite": "4.0.3"
+    "vite": "4.0.4"
   },
   "dependencies": {
     "urlpattern-polyfill": "6.0.2"

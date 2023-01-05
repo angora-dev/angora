@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { setAngoraFetchHeaders } from '@angora/fetch/next';
+import { setAngoraFetchHeaders } from '@angora/fetch';
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();

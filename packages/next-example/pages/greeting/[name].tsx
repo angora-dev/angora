@@ -1,4 +1,4 @@
-import { getFetchHooks } from '@angora/fetch/next';
+import { getFetchHooks } from '@angora/fetch';
 
 export const angora = {
   fetch: ['/api/greeting/[name]'],

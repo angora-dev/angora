@@ -1,16 +1,16 @@
 {
   "extends": "@angora/tsconfig/react-library.json",
-  "include": ["./lib/main.ts", "lib/next/with-angora-fetch.ts", "lib/**/*"],
-  "exclude": ["dist", "build", "node_modules", "lib/index.d.ts"],
+  "include": ["./src/build/main.ts", "src/next/main.ts"],
+  "exclude": ["dist", "node_modules"],
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationMap": false,
     "isolatedModules": false,
-    "out": "dist/index.d.ts",
-    "baseUrl": "./lib",
+    "outDir": "./dist",
     "paths": {
-      "@angora/fetch": ["/"],
+      "@angora/fetch": ["./src/next"],
+      "@angora/fetch/build": ["./src/build"],
     }
   },
   "watchOptions": {

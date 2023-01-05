@@ -1,0 +1,43 @@
+{
+  "name": "@angora/fetch-react",
+  "version": "0.0.1",
+  "description": "Blazingly Fast Data Fetching for React 🔥",
+  "author": {
+    "name": "Mertin Dervish",
+    "email": "mertindervish@gmail.com",
+    "url": "https://mertindervish.com"
+  },
+  "files": ["dist"],
+  "types": "./dist/main.d.ts",
+  "main": "./dist/main.js",
+  "exports": {
+    ".": {
+      "import": "./dist/main.mjs",
+      "require": "./dist/main.js",
+      "default": "./dist/main.js"
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "lint": "TIMING=1 eslint \"**/*.ts*\"",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@angora/fetch-core": "*",
+    "@angora/tsconfig": "*",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "concurrently": "7.6.0",
+    "eslint": "8.30.0",
+    "eslint-config-angora": "*",
+    "react": "18.2.0",
+    "rollup-plugin-analyzer": "4.0.0",
+    "typescript": "4.9.4",
+    "vite": "4.0.4"
+  },
+  "dependencies": {
+    "urlpattern-polyfill": "6.0.2"
+  }
+}

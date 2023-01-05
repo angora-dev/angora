@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app';
 
-import { NextAngoraFetchProvider } from '@angora/fetch/next';
+import { NextAngoraFetchProvider } from '@angora/fetch';
 
 import Layout from './layout';
 

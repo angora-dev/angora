@@ -24,65 +24,30 @@ export default function Layout({ children }: LayoutProps) {
         <h1>Example Next.js using Angora!</h1>
 
         <menu className={styles['menu']}>
-          <div className={styles['menu-section']}>
-            <span>
-              With <strong>Angora Fetch:</strong>
-            </span>
-            <Link
-              href="/"
-              prefetch={false}
-              title="2 requests: /api/world and /api/universe"
-              className={router.pathname === '/' ? styles['menu-item--active'] : ''}
-            >
-              Home
-            </Link>
-            <Link
-              href="/world"
-              prefetch={false}
-              title="1 request: /api/world"
-              className={router.pathname === '/world' ? styles['menu-item--active'] : ''}
-            >
-              World
-            </Link>
-            <Link
-              href="/universe"
-              prefetch={false}
-              title="1 request: /api/universe"
-              className={router.pathname === '/universe' ? styles['menu-item--active'] : ''}
-            >
-              Universe
-            </Link>
-          </div>
-
-          <div className={styles['menu-section']}>
-            <span>
-              Without <strong>Angora Fetch:</strong>
-            </span>
-            <Link
-              href="/normal"
-              prefetch={false}
-              title="2 requests: /api/world and /api/universe"
-              className={router.pathname === '/normal' ? styles['menu-item--active'] : ''}
-            >
-              Home
-            </Link>
-            <Link
-              href="/normal/world"
-              prefetch={false}
-              title="1 request: /api/world"
-              className={router.pathname === '/normal/world' ? styles['menu-item--active'] : ''}
-            >
-              World
-            </Link>
-            <Link
-              href="/normal/universe"
-              prefetch={false}
-              title="1 request: /api/universe"
-              className={router.pathname === '/normal/universe' ? styles['menu-item--active'] : ''}
-            >
-              Universe
-            </Link>
-          </div>
+          <Link
+            href="/"
+            prefetch={false}
+            title="2 requests: /api/world and /api/universe"
+            className={router.pathname === '/' ? styles['menu-item--active'] : ''}
+          >
+            Home
+          </Link>
+          <Link
+            href="/world"
+            prefetch={false}
+            title="1 request: /api/world"
+            className={router.pathname === '/world' ? styles['menu-item--active'] : ''}
+          >
+            World
+          </Link>
+          <Link
+            href="/universe"
+            prefetch={false}
+            title="1 request: /api/universe"
+            className={router.pathname === '/universe' ? styles['menu-item--active'] : ''}
+          >
+            Universe
+          </Link>
         </menu>
         {children}
       </main>
