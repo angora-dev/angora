@@ -35,7 +35,7 @@ Inside your Next.js project directory, run the following:
 Update `next.config.js` to add `withAngoraFetch`:
 
 ```javascript filename="next.config.js" {1,8} 
-const withAngoraFetch = require('@angora/fetch/with-angora-fetch');
+const { withAngoraFetch } = require('@angora/fetch/build');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -74,15 +74,14 @@ add `AngoraFetchProvider`:
 
 ```tsx filename="pages/_app.tsx" {4,8,10}
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 
-import { AngoraFetchProvider } from '@angora/fetch';
+import { NextAngoraFetchProvider } from '@angora/fetch';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <AngoraFetchProvider>
+    <NextAngoraFetchProvider>
       <Component {...pageProps} />
-    </AngoraFetchProvider>
+    </NextAngoraFetchProvider>
   );
 }
 ```
@@ -118,4 +117,4 @@ export default function HomePage() {
 ## CodeSandbox
 
 There is also a CodeSandbox that you can fork and start experimenting faster: 
-https://codesandbox.io/p/sandbox/next-js-with-angora-fetch-example-6946nt
+https://codesandbox.io/p/sandbox/next-js-with-angora-fetch-example-z5m10e
