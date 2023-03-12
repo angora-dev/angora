@@ -14,7 +14,7 @@ export default defineConfig({
         build: resolve(__dirname, 'src/build/main.ts'),
         next: resolve(__dirname, 'src/next/main.ts'),
       },
-      formats: ['es', 'cjs'],
+      formats: ['cjs'],
     },
     rollupOptions: {
       external: [

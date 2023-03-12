@@ -1,6 +1,6 @@
 {
   "name": "@angora/fetch",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Blazingly Fast Data Fetching 🔥",
   "homepage": "https://fetch.angora.dev",
   "repository": "angora-dev/angora",
@@ -16,13 +16,11 @@
   "exports": {
     ".": {
       "types": "./dist/next/main.d.ts",
-      "import": "./dist/next.mjs",
       "require": "./dist/next.js",
       "default": "./dist/next.js"
     },
     "./build": {
       "types": "./dist/build/main.d.ts",
-      "import": "./dist/build.mjs",
       "require": "./dist/build.js",
       "default": "./dist/build.js"
     }
